@@ -139,3 +139,7 @@ function getMid(l) {
 }
 // let test5 = linkedListGanerator([1, 2, 3, 4, 5, 6, 7])
 // getMid(test5)
+
+module.exports = {
+  linkedListGanerator,
+}
