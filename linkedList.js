@@ -17,6 +17,17 @@ function linkedListGanerator(list) {
   return head.next;
 }
 
+function print(head) {
+  let str = '['
+  while (head) {
+    str = str + head.val + ' '
+    head = head.next
+  }
+  str = str.slice(0, -1)
+  str += ']'
+  console.log(str)
+}
+
 function reverse(l) {
   let pre = null
   let cur = l
@@ -142,4 +153,5 @@ function getMid(l) {
 
 module.exports = {
   linkedListGanerator,
+  print,
 }
