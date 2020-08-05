@@ -18,8 +18,6 @@ const removeDuplicates = function(nums) {
     }
   }
 
-  console.log(nums.slice(0, j + 1))
-
   return j + 1
 }
 
