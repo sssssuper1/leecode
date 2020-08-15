@@ -1,15 +1,15 @@
 class TreeNode {
-  constructor(value) {
-    this.value = value
+  constructor(val) {
+    this.val = val
   }
-  value = null
+  val = null
   left = null
   right = null
 }
 
 function preOrder(node) {
   if (!node) return
-  console.log(node.value)
+  console.log(node.val)
   preOrder(node.left)
   preOrder(node.right)
 }
@@ -17,7 +17,7 @@ function preOrder(node) {
 function inOrder(node) {
   if (!node) return
   inOrder(node.left)
-  console.log(node.value)
+  console.log(node.val)
   inOrder(node.right)
 }
 
@@ -25,51 +25,51 @@ function postOrder(node) {
   if (!node) return
   postOrder(node.left)
   postOrder(node.right)
-  console.log(node.value)
+  console.log(node.val)
 }
 
-function find(node, value) {
+function find(node, val) {
   if (!node) return null
 
-  if (value < node.value) {
-    return find(node.left, value)
-  } else if (value > node.value) {
-    return find(node.right, value)
+  if (val < node.val) {
+    return find(node.left, val)
+  } else if (val > node.val) {
+    return find(node.right, val)
   } else {
     return node
   }
 }
 
-function insert(node, value) {
-  if (!node) return new TreeNode(value)
+function insert(node, val) {
+  if (!node) return new TreeNode(val)
 
-  if (value < node.value) {
+  if (val < node.val) {
     if (!node.left) {
-      node.left = new TreeNode(value)
+      node.left = new TreeNode(val)
     } else {
-      insert(node.left, value)
+      insert(node.left, val)
     }
   } else {
     if (!node.right) {
-      node.right = new TreeNode(value)
+      node.right = new TreeNode(val)
     } else {
-      insert(node.right, value)
+      insert(node.right, val)
     }
   }
 
   return node
 }
 
-function del(root, value) {
+function del(root, val) {
   let node = root
   let parent = null
   let dr = ''
   while (node) {
-    if (value < node.value) {
+    if (val < node.val) {
       parent = node
       dr = 'left'
       node = node.left
-    } else if (value > node.value) {
+    } else if (val > node.val) {
       parent = node
       dr = 'right'
       node = node.right
@@ -104,11 +104,16 @@ function del(root, value) {
       min = min.left
     }
 
-    node.value = min.value
+    node.val = min.val
     minParent.left = null
   }
 
   return root
+}
+
+module.exports = {
+  insert,
+  inOrder,
 }
 
 const root = insert(null, 5)
