@@ -1,18 +1,22 @@
+// 归并
+
 const sortList = function(head) {
   return sort(head).head;
 }
 
-function sort(head, end = null) {
-  if (!head || !head.next || (head === end) || (end && end.next === head)) return {
-    head: head,
-    tail: null,
-  };
+function sort(head) {
+  if (!head || !head.next) {
+    return {
+      head: head,
+      tail: null,
+    };
+  }
   let result = { next: null };
   let l = result;
   let flag = head;
   let cur = head;
 
-  while (cur.next && cur.next !== end) {
+  while (cur.next) {
     if (cur.next.val < flag.val) {
       let tmp = cur.next;
       cur.next = tmp.next;
@@ -25,21 +29,22 @@ function sort(head, end = null) {
   }
 
   const right = sort(flag.next);
-  const left = sort(result.next, flag);
+  const left = sort(result.next);
+  flag.next = right.head;
   if (left.tail) {
-    left.tail.next = right.head;
+    left.tail.next = flag;
   } else {
-    result.next = right.head;
+    l.next = flag;
   }
 
   return {
-    head: result.next,
-    tail: right ? right.tail : null, 
+    head: left.head ? left.head : result.next,
+    tail: right.tail ? right.tail : right.head ? right.head : flag, 
   };
 }
 
 const { linkedListGanerator, print } = require('./linkedList');
 
-const input = linkedListGanerator([-1,5,3,4,0]);
+const input = linkedListGanerator([3,2,1]);
 
 print(sortList(input));
