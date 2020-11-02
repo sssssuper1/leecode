@@ -41,8 +41,16 @@ function reverse(l) {
 
   return pre
 }
-// let test1 = linkedListGanerator([1, 2, 3, 4, 5])
-// console.log(reverse(test1))
+
+function reverse2(l) {
+  if (!l.next) return l
+  let tail = reverse2(l.next)
+  l.next.next = l
+  l.next = null
+  return tail
+}
+let test1 = linkedListGanerator([1, 2, 3, 4, 5])
+print(reverse2(test1))
 
 
 function hasLoop(l) {
