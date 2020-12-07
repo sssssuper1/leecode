@@ -34,4 +34,52 @@ const c2 = {
   polarR: 34.4,
 }
 
-console.log(getTriangleThirdPoint(c1, c2, 7.17, 4))
+// console.log(getTriangleThirdPoint(c1, c2, 7.17, 4))
+
+function move(l) {
+  let i = 0
+  let j = 0
+  while (i < l.length) {
+    if (l[i] === 0) {
+      i++
+    } else {
+      if (i > j) {
+        [l[i], l[j]] = [l[j], l[i]]
+      }
+      i++
+      j++
+    }
+  }
+
+  return l
+}
+
+// console.log(move([0,1,0,3,12]))
+
+const mq = {}
+const memo = {}
+
+function on(action, cb) {
+  const id = Symbol()
+  const event = { cb, id }
+  if (mq[action]) {
+    mq[action].push(event)
+  } else {
+    mq[action] = [event]
+  }
+
+  memo[id] = action
+
+  return id
+}
+
+function emit(action, ...args) {
+  if (mq[action]) {
+    mq[action].forEach(e => e.cb(...args))
+  }
+}
+
+function off(id) {
+  if (!memo[id]) return
+  mq[memo[id]] = mq[memo[id]].filter(e => e.id !== id)
+}
