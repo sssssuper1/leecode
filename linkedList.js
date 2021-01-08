@@ -50,7 +50,6 @@ function reverse2(l) {
   return tail
 }
 let test1 = linkedListGanerator([1, 2, 3, 4, 5])
-print(reverse2(test1))
 
 
 function hasLoop(l) {
